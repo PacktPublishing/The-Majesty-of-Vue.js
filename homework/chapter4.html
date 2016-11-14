@@ -1,0 +1,47 @@
+<html>
+<head>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+    <title>People of Gaul</title>
+</head>
+<body>
+<div class="container">
+    <h1>People of Gaul</h1>
+    <ul class="list-group">
+        <!-- render filtered array items using 'v-for' -->
+        <!-- 'orderBy' is a built in filter used for ordering by 'age'-->
+        <li v-for="person in people | orderBy 'age' " class="list-group-item">
+            {{person.name}} {{person.age}}
+        </li>
+    </ul>
+    <h1>"Old" People of Gaul</h1>
+    <ul class="list-group">
+        <!-- render filtered array items -->
+        <li v-for="person in people | old " class="list-group-item">
+            <!-- custom filter 'old' -->
+            {{person.name}} {{person.age}}
+        </li>
+    </ul>
+</div>
+<pre>{{ $data | json }}</pre>
+</body>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/vue/1.0.26/vue.js"></script>
+<script type="text/javascript">
+    //custom filter 'old' returns an array of items that satisfy the given condition
+    Vue.filter('old', function (people) {
+        return people.filter(function (item) {
+            return item.age > 55;
+        });
+    })
+    new Vue({
+        el: 'body',
+        data: {
+            people: [
+                {name: "Obelix", age: 31},
+                {name: "Asterix", age: 32},
+                {name: "Majestix", age: 62},
+                {name: "Julius Caesar", age: 56},
+            ]
+        },
+    })
+</script>
+</html>

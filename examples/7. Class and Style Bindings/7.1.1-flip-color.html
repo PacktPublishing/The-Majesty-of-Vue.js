@@ -1,0 +1,35 @@
+<html>
+<head>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+  <title>Hello Vue</title>
+</head>
+<body class="text-center"
+v-bind:class="{ 'body-red' : color, 'body-blue' : !color }"
+>
+<button v-on:click="flipColor" class="btn">
+  Flip color!
+</button>
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.26/vue.js"></script>
+<script type="text/javascript">
+new Vue({
+  el: 'body',
+  data: {
+    color: true
+  },
+  methods: {
+    flipColor: function() {
+      this.color = !this.color;
+    }
+  }
+});
+</script>
+<style type="text/css">
+.body-red {
+  background-color: #ff0000;
+}
+.body-blue {
+  background-color: #0000ff;
+}
+</style>
+</html>

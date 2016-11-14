@@ -1,0 +1,53 @@
+<html>
+<head>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+  <title>Hello Vue</title>
+</head>
+<body>
+  <div id="app">
+    <div class="container">
+      <h1>Let's hear some stories!</h1>
+      <ul class="list-group">
+        <story v-for="story in stories" :story="story"></story>
+      </ul>
+      <pre>{{ $data | json }}</pre>
+    </div>
+  </div>
+  <template id="story-template">
+    <li  class="list-group-item">
+      {{ story.writer }} said "{{ story.plot }}"
+    </li>
+  </template>
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.26/vue.js"></script>
+<script type="text/javascript">
+Vue.component('story', {
+  template: "#story-template",
+  props: ['story'],
+});
+
+new Vue({
+  el: '#app',
+  data: {
+    stories: [
+      {
+        plot: 'My horse is amazing.',
+        writer: 'Mr. Weebl',
+      },
+      {
+        plot: 'Narwhals invented Shish Kebab.',
+        writer: 'Mr. Weebl',
+      },
+      {
+        plot: 'The dark side of the Force is stronger.',
+        writer: 'Darth Vader',
+      },
+      {
+        plot: 'One does not simply walk into Mordor',
+        writer: 'Boromir',
+      },
+    ]
+  }
+})
+</script>
+</html>

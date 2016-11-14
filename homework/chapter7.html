@@ -1,0 +1,35 @@
+<html>
+<head>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+    <title>Paint Me</title>
+</head>
+<!-- binding body style to an object -->
+<body :style="bgColor">
+    <div id="app">
+      <div class="container">
+        <h1>Paint this background!</h1>
+        <input type="color" v-model="bgColor.backgroundColor" />
+      </div>
+    </div>
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.26/vue.js"></script>
+<script type="text/javascript">
+    new Vue({
+      el: 'body',
+      data: {
+        bgColor: {
+          backgroundColor: "#00cc00"
+        }
+      }
+    });
+</script>
+<style type="text/css">
+    .centered {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        margin-top: -50px;
+        margin-left: -100px;
+    }
+</style>
+</html>

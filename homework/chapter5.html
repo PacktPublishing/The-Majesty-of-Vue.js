@@ -1,0 +1,59 @@
+<html>
+<head>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+    <title>The Elections</title>
+</head>
+<!-- listening for keyboard event -->
+<body @keyup.c="clear">
+<div class="container">
+    <h1>People of Vue</h1>
+    <ul class="list-group">
+        <li v-for="candidate in candidates" class="list-group-item">
+            {{candidate.name}} {{candidate.votes}}
+            <!-- increase votes 'on:click'-->
+            <button class="btn btn-default" @click="candidate.votes++">Vote</button>
+        </li>
+    </ul>
+
+    <!-- display the name of the 'mayor' using a computed property-->
+    <h2>Our mayor is {{mayor.name}}!</h2>
+
+    <pre>{{ $data | json }}</pre>
+    <pre>{{ mayor | json }}</pre>
+</div>
+</body>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/vue/1.0.26/vue.js"></script>
+<script type="text/javascript">
+    var vm = new Vue({
+        el: 'body',
+        data: {
+            candidates: [
+                {name: "Mr. Black", votes: 140},
+                {name: "Mr. White", votes: 135},
+                {name: "Mr. Pink", votes: 145},
+                {name: "Mr. Brown", votes: 130},
+            ]
+        },
+        computed: {
+            mayor: function () {
+                //first we sort the array descending
+                var candidatesSorted = this.candidates.sort(function (a, b) {
+                    return b.votes - a.votes;
+                });
+                //the mayor will be the first item
+                return candidatesSorted[0];
+            }
+        },
+        methods: {
+            //this method runs when the key 'c' is pressed
+            clear: function () {
+                //Turn votes of all candidate to 0 using map() function.
+                this.candidates = this.candidates.map(function (candidate) {
+                    candidate.votes = 0;
+                    return candidate;
+                })
+            }
+        }
+    })
+</script>
+</html>

@@ -1,0 +1,80 @@
+<html>
+<head>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+    <title>Horse-drawn Chariots</title>
+</head>
+<body>
+<div class="container">
+    <h1>Chariot shopping</h1>
+    <ul class="list-group">
+        <!-- '.sync' ensures two-way binding between child's property and parent's one -->
+        <chariot v-for="chariot in chariots" :chariot="chariot" :selected.sync="selected"></chariot>
+    </ul>
+    <pre>{{ $data | json }}</pre>
+</div>
+<!-- component template -->
+<template id="chariot-template">
+    <li class="list-group-item">
+        <h4>"{{ chariot.name }}" chariot has <strong>{{ chariot.horses }}</strong> horse(s)!</h4>
+        <!-- 'disabled' attribute is applied conditionally -->
+        <button @click="rideChariot(chariot)" class="btn btn-primary" :disabled="isSelectedChariot">
+            {{ action }}
+        </button>
+    </li>
+</template>
+<!-- end component template -->
+</body>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/vue/1.0.26/vue.js"></script>
+<script type="text/javascript">
+    Vue.component('chariot', {
+        props: ['chariot', 'selected'],
+        template: "#chariot-template",
+        methods: {
+            rideChariot: function (chariot) {
+                this.selected = chariot;
+            },
+        },
+        computed: {
+            //is true when the chariot has more horses than the selected one
+            hasMoreHorses: function () {
+                return this.selected.horses < this.chariot.horses
+            },
+            //is true when the chariot is the selected one
+            isSelectedChariot: function () {
+                return this.selected.name == this.chariot.name
+            },
+            //is true when there is no chariot selected
+            noChariot: function () {
+                return this.selected.name == null;
+            },
+            //define the action for each chariot
+            action: function () {
+                if (this.noChariot) {
+                    action = 'Pick Chariot'
+                } else if (this.isSelectedChariot) {
+                    action = 'Riding!'
+                } else if (this.hasMoreHorses) {
+                    action = 'Hire Horses'
+                } else {
+                    action = 'Dismiss Horses'
+                }
+                return action;
+            }
+
+        }
+    });
+    var vm = new Vue({
+        el: 'body',
+        data: {
+            chariots: [
+                {name: "Olympus", horses: 4},
+                {name: "Sagitta", horses: 3},
+                {name: "Icarus", horses: 2},
+                {name: "Abraxas", horses: 1},
+            ],
+            //the currently selected 'chariot'
+            selected: {}
+        },
+    })
+</script>
+</html>
