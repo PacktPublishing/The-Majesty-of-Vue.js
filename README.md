@@ -1,5 +1,5 @@
 #The Majesty of Vue.js
-This is the code repository for [The Majesty of Vue.js](), published by Packt. It contains all the supporting project files necessary to work through the book from start to finish.
+This is the code repository for [The Majesty of Vue.js](https://www.packtpub.com/web-development/majesty-vuejs?utm_source=GitHub&utm_campaign=9781787124370&utm_medium=Repository), published by Packt. It contains all the supporting project files necessary to work through the book from start to finish.
 ##Instructions and Navigations
 All of the code is organized into folders. Each folder starts with a number followed by the application name. For example, Chapter02.
 
@@ -8,7 +8,7 @@ All of the code is organized into folders. Each folder starts with a number foll
 The code will look like the following:
 ```
 function(x, y){
-// this is a comment
+  // this is a comment
 }
 ```
 
